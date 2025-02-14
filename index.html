@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            transform: translateY(0);
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .rating-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+
+        .rating-star {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .rating-star:hover,
+        .rating-star.active {
+            color: #ffd700;
+            transform: scale(1.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #764ba2;
+            box-shadow: 0 0 8px rgba(118, 75, 162, 0.2);
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button i {
+            transition: transform 0.3s ease;
+        }
+
+        button:hover i {
+            transform: translateX(3px);
+        }
+
+        .thank-you {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .emoji-container {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-share {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: #764ba2;
+            transform: translateY(-3px);
+        }
+
+        .character-count {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Review Form</h2>
+        <form id="reviewForm" action="https://formspree.io/f/xanqpyjb" method="POST">
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Your Email" required>
+            </div>
+
+            <div class="rating-container">
+                <i class="fas fa-star rating-star" data-value="1"></i>
+                <i class="fas fa-star rating-star" data-value="2"></i>
+                <i class="fas fa-star rating-star" data-value="3"></i>
+                <i class="fas fa-star rating-star" data-value="4"></i>
+                <i class="fas fa-star rating-star" data-value="5"></i>
+                <input type="hidden" name="rating" id="selectedRating" required>
+            </div>
+
+            <div class="form-group">
+                <textarea name="comments" placeholder="Your feedback helps us improve..." rows="5" required maxlength="500"></textarea>
+                <div class="character-count"><span id="charCount">0</span>/500</div>
+            </div>
+
+            <button type="submit">
+                Submit Review
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+
+        <div class="thank-you">
+            <div class="emoji-container">🎉</div>
+            <h3>Thank You for Your Feedback!</h3>
+            <p>We appreciate you taking the time to share your experience with us.</p>
+            <div class="social-share">
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Star Rating Interaction
+        const stars = document.querySelectorAll('.rating-star');
+        const ratingInput = document.getElementById('selectedRating');
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+                ratingInput.value = value;
+                
+                stars.forEach(s => {
+                    s.classList.toggle('active', s.getAttribute('data-value') <= value);
+                });
+            });
+        });
+
+        // Character Counter
+        const textarea = document.querySelector('textarea');
+        const charCount = document.getElementById('charCount');
+
+        textarea.addEventListener('input', () => {
+            charCount.textContent = textarea.value.length;
+        });
+
+        // Allow Formspree to Process Submission
+        document.getElementById('reviewForm').addEventListener('submit', () => {
+            document.querySelector('.thank-you').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
